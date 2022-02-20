@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://resources/Fonts/diffusion/ttf/diffusion-regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://resources/UiThemes/ButtonTheme.tres" type="StyleBox" id=2]
+[ext_resource path="res://resources/Fonts/diffusion/ttf/diffusion-lightitalic.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://resources/UiThemes/ButtonThemeFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://resources/Scripts/HUD.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=5]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 50
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="HUD" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -181, 318 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_timer" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -152.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 5 )
+text = "Timer 00:00"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debug_rect" type="ReferenceRect" parent="."]
+visible = false
+anchor_left = 0.00976563
+anchor_top = 0.0166667
+anchor_right = 0.304688
+anchor_bottom = 0.191667
+margin_top = -9.53674e-07
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="label_grid_position" type="Label" parent="debug_rect"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 596.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 5 )
+text = "Grid position : (x,y)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_last_move" type="Label" parent="debug_rect"]
+margin_left = 6.0
+margin_top = 26.0
+margin_right = 596.0
+margin_bottom = 43.0
+custom_fonts/font = SubResource( 5 )
+text = "Last move  : (x,y)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_whos_turn" type="Label" parent="debug_rect"]
+margin_left = 6.0
+margin_top = 46.0
+margin_right = 46.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 5 )
+text = "? turn"
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="PauseMenu"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 132.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 6 )
+text = "Pause Menu "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_resume" type="Button" parent="PauseMenu"]
+margin_left = 32.0
+margin_top = 200.0
+margin_right = 680.0
+margin_bottom = 240.0
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Resume"
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_quit_game" type="Button" parent="PauseMenu"]
+margin_left = 32.0
+margin_top = 350.0
+margin_right = 680.0
+margin_bottom = 390.0
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Quit"
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="PauseMenu/btn_resume" to="." method="_on_btn_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/btn_quit_game" to="." method="_on_btn_quit_game_pressed"]
