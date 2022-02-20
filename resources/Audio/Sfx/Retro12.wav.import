@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Retro12.wav-00f4bbd6427d2d410f77de27d8b7e1da.sample"
+
+[deps]
+
+source_file="res://resources/Audio/Sfx/Retro12.wav"
+dest_files=[ "res://.import/Retro12.wav-00f4bbd6427d2d410f77de27d8b7e1da.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

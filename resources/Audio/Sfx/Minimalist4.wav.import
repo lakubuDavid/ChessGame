@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Minimalist4.wav-9fac696d5273fa4e1a46f8534b900a72.sample"
+
+[deps]
+
+source_file="res://resources/Audio/Sfx/Minimalist4.wav"
+dest_files=[ "res://.import/Minimalist4.wav-9fac696d5273fa4e1a46f8534b900a72.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

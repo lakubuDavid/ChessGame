@@ -1,16 +1,17 @@
 extends Area
 
-export var is_black : bool = false
 
 signal moved
 signal killed
 
 onready var SelectedPieceMat : SpatialMaterial = preload("res://resources/Materials/SelectedPieceMat.tres")
 onready var PossibleTargetMoveMat : SpatialMaterial = preload("res://resources/Materials/PossibleTargetMoveMat.tres")
+onready var MoveSfx : AudioStream = preload("res://resources/Audio/Sfx/Minimalist7.wav")
 #onready var EatingTargetMoveMat : SpatialMaterial = preload("res://resources/Materials/EatingTargetMoveMat.tres")
 onready var hud : Control = get_node("../../../HUD")
 onready var board = get_node("../..")
 
+var move_sfx : AudioStreamPlayer
 var is_king : bool
 var move_indicators : Array = []
 var grid_position : Vector2
@@ -29,14 +30,15 @@ func _ready():
 	indicator.mesh.size = Vector2(2,2)
 	indicator.material_override = SelectedPieceMat
 	indicator.visible = false
+
+	move_sfx = AudioStreamPlayer.new()
+	move_sfx.stream = MoveSfx
+	
 	add_child(tween)
 	add_child(tween2)
 	add_child(indicator)
+	add_child(move_sfx)
 	
-	if(is_black):
-		add_to_group("Blacks")
-	else:
-		add_to_group("Whites")
 	pass # Replace with function body.
 
 func set_focus(value):
@@ -79,10 +81,10 @@ func set_focus(value):
 		pass
 		
 func is_same_group(x,y):
-	if(is_black):
-		return ((not board.grid[x][y] is int) and board.grid[x][y].is_in_group("Blacks"))
-	else:
-		return ((not board.grid[x][y] is int) and board.grid[x][y].is_in_group("Whites"))
+	if(x>=8 or x<0 or y>=8 or y<0):
+		print_debug("Invalid move ("+str(x)+";"+str(y)+")")
+		return false
+	return ((not board.grid[x][y] is int) and board.grid[x][y].is_in_group(get_groups()[0]))
 	
 func get_has_focus():
 	return has_focus
@@ -97,14 +99,10 @@ func move(target_position : Vector2):
 		tween_running = true
 		var final_case = board.grid[target_position.x][target_position.y]
 		if(not final_case is int):
-			if(is_black and final_case.is_in_group("Blacks")):
+			if(is_same_group(target_position.x,target_position.y)):
 				final_case.call("move",grid_position)
-			elif(not is_black and final_case.is_in_group("Blacks")):
+			else:
 				final_case.call("die")
-			elif(is_black and final_case.is_in_group("Whites")):
-				final_case.call("die")
-			elif(not is_black and final_case.is_in_group("Whites")):
-				final_case.call("move",grid_position)
 		
 		emit_signal("moved")
 
@@ -120,10 +118,8 @@ func move(target_position : Vector2):
 			tween_running = true
 			var final_case = board.grid[target_position.x][target_position.y]
 			if(not final_case is int):
-				if(not is_black and final_case.is_in_group("Blacks")):
+				if(not is_same_group(target_position.x,target_position.y)):
 					final_case.call("die") 
-				elif(is_black and final_case.is_in_group("Whites")):
-					final_case.call("die")
 			board.grid[target_position.x][target_position.y] = self
 			hud.get_node("debug_rect/label_last_move").text = "Move : from:"+str(grid_position)+" to:"+str(target_position)
 			grid_position = target_position
@@ -151,14 +147,7 @@ func die():
 	
 
 func is_valid_move(move : Vector2,is_king : bool = false):
-	if(not(move.x >=0 and move.x <8 and move.y >=0 and move.y <8)):
-		return false
 	if(is_king):
 		return move.x >=0 and move.x <8 and move.y >=0 and move.y <8
 	else:
-		if(is_black):
-			if(board.grid[move.x][move.y] is int or board.grid[move.x][move.y].is_in_group("Whites")):
-				return move.x >=0 and move.x <8 and move.y >=0 and move.y <8
-		else:
-			if(board.grid[move.x][move.y] is int or board.grid[move.x][move.y].is_in_group("Blacks")):
-				return move.x >=0 and move.x <8 and move.y >=0 and move.y <8
+		return (not is_same_group(move.x,move.y)) and (move.x >=0 and move.x <8 and move.y >=0 and move.y <8)

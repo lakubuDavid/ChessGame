@@ -2,6 +2,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$PauseMenu.visible = false
 	pass # Replace with function body.
 
 func _process(delta):

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/African1.wav-bcee1bff6e0b11b7b6433cd2280f562d.sample"
+
+[deps]
+
+source_file="res://resources/Audio/Sfx/African1.wav"
+dest_files=[ "res://.import/African1.wav-bcee1bff6e0b11b7b6433cd2280f562d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

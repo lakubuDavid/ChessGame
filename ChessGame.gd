@@ -22,7 +22,6 @@ onready var tween : Tween = get_node("Tween")
 onready var hud : Control = get_node("../HUD")
 
 var ray_length = 1000
-var is_blacks_turn = true
 var tween_running : bool = false
 var moving_piece : bool
 var moving_piece_group : String = "Blacks"
@@ -38,10 +37,7 @@ func _ready():
 		moving_piece_group = "Blacks"
 	else:
 		moving_piece_group = "Whites"
-	if(moving_piece_group == "Blacks"):
-		is_blacks_turn = true
-	else:
-		is_blacks_turn = false
+
 	for x in range(8):
 		grid.append([])
 		for y in range(8):
@@ -78,7 +74,6 @@ func _input(event):
 						if(last_focused_piece != null):
 							moving_piece = false
 							last_focused_piece.call("move",col.get_meta("possible_move"))
-							is_blacks_turn = not is_blacks_turn
 							if(moving_piece_group == "Whites"):
 								moving_piece_group = "Blacks"
 							else:
@@ -217,7 +212,6 @@ func reset_board():
 	timer = 0
 	last_focused_piece = null
 	moving_piece = false
-	is_blacks_turn = true
 	for c in pieces.get_children():
 		c.get_parent().remove_child(c)
 		c.queue_free()

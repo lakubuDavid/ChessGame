@@ -13,7 +13,7 @@ func _ready():
 	pass # Replace with function body.
 
 func when_moved():
-	if(is_black):
+	if(get_groups()[0] == "Blacks"):
 		if(grid_position.x == 0):
 			upgrade_pawn()
 	else:
@@ -29,7 +29,7 @@ func upgrade_pawn():
 
 func check_possible_moves() -> Array:
 	var possible_moves = []
-	if(is_black):
+	if(get_groups()[0] == "Blacks"):
 		if(board.grid[grid_position.x-1][grid_position.y] is int):
 			possible_moves.append(Vector2(grid_position.x-1,grid_position.y))
 		
@@ -47,7 +47,7 @@ func check_possible_moves() -> Array:
 			possible_moves.append(Vector2(grid_position.x+1,grid_position.y+1))
 	
 	if(first_move):
-		if(is_black):
+		if(get_groups()[0] == "Blacks"):
 			if(board.grid[grid_position.x-1][grid_position.y] is int and board.grid[grid_position.x-2][grid_position.y] is int):
 				possible_moves.append(Vector2(grid_position.x-2,grid_position.y))
 		else:

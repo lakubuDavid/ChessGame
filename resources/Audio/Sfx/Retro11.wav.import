@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Retro11.wav-dacf0b1888c3c7aaa3a44905d3c8ae17.sample"
+
+[deps]
+
+source_file="res://resources/Audio/Sfx/Retro11.wav"
+dest_files=[ "res://.import/Retro11.wav-dacf0b1888c3c7aaa3a44905d3c8ae17.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

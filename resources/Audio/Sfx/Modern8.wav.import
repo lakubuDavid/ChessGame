@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Modern8.wav-5c11cc4052277744ccd1ad7c3ab6e825.sample"
+
+[deps]
+
+source_file="res://resources/Audio/Sfx/Modern8.wav"
+dest_files=[ "res://.import/Modern8.wav-5c11cc4052277744ccd1ad7c3ab6e825.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
