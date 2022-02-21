@@ -148,6 +148,6 @@ func die():
 
 func is_valid_move(move : Vector2,is_king : bool = false):
 	if(is_king):
-		return move.x >=0 and move.x <8 and move.y >=0 and move.y <8
+		return (not is_same_group(move.x,move.y) or (board.grid[move.x][move.y].get_groups()[1]== "Rooks")) and (move.x >=0 and move.x <8 and move.y >=0 and move.y <8)
 	else:
 		return (not is_same_group(move.x,move.y)) and (move.x >=0 and move.x <8 and move.y >=0 and move.y <8)
