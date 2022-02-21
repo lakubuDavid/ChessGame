@@ -26,7 +26,10 @@ var tween_running : bool = false
 var moving_piece : bool
 var moving_piece_group : String = "Blacks"
 var grid = []
-
+#    grid[x][y] Can have 3 values :
+#    0 : Empty case
+#    PossibleMove
+#    ChessPiece
 var timer = 0
 
 var last_focused_piece
