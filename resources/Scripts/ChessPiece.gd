@@ -7,7 +7,7 @@ signal killed
 onready var SelectedPieceMat : SpatialMaterial = preload("res://resources/Materials/SelectedPieceMat.tres")
 onready var PossibleTargetMoveMat : SpatialMaterial = preload("res://resources/Materials/PossibleTargetMoveMat.tres")
 onready var MoveSfx : AudioStream = preload("res://resources/Audio/Sfx/Minimalist7.wav")
-#onready var EatingTargetMoveMat : SpatialMaterial = preload("res://resources/Materials/EatingTargetMoveMat.tres")
+onready var EatingTargetMoveMat : SpatialMaterial = preload("res://resources/Materials/EatingTargetMoveMat.tres")
 onready var hud : Control = get_node("../../../HUD")
 onready var board = get_node("../..")
 
@@ -51,7 +51,10 @@ func set_focus(value):
 			var indicator_mesh = MeshInstance.new()
 			indicator_mesh.mesh = PlaneMesh.new()
 			indicator_mesh.mesh.size = Vector2(2.0,2.0)
-			indicator_mesh.material_override = PossibleTargetMoveMat
+			if(is_killing_move(Vector2(p_moves[i].x,p_moves[i].y))):
+				indicator_mesh.material_override = EatingTargetMoveMat
+			else:
+				indicator_mesh.material_override = PossibleTargetMoveMat
 			indicator_mesh.visible = true
 			
 			var move_indicator = Area.new()
@@ -62,7 +65,7 @@ func set_focus(value):
 			
 			var collision_shape = CollisionShape.new()
 			collision_shape.shape = BoxShape.new()
-			collision_shape.shape.extents = Vector3(1,.5,1)
+			collision_shape.shape.extents = Vector3(1,.25,1)
 			
 			move_indicator.add_child(collision_shape)
 			move_indicator.add_child(indicator_mesh)
@@ -124,9 +127,9 @@ func move(target_position : Vector2):
 			hud.get_node("debug_rect/label_last_move").text = "Move : from:"+str(grid_position)+" to:"+str(target_position)
 			grid_position = target_position
 			emit_signal("moved")
+			board.move_sfx.play()
 			yield(tween,"tween_completed")
 		tween_running = false
-	pass
 	
 func check_possible_moves() -> Array :
 	var possible_moves = []
@@ -140,12 +143,14 @@ func die():
 	tween.start()
 	tween_running = true
 	tween.connect("tween_completed",tween,"queue_free")
+	board.kill_sfx.play()
 	yield(tween,"tween_completed")
 	tween_running = false
-	
 	pass
 	
-
+func is_killing_move(move : Vector2):
+	return not board.grid[move.x][move.y] is int and is_valid_move(move)
+		
 func is_valid_move(move : Vector2,is_king : bool = false):
 	if(is_king):
 		return (not is_same_group(move.x,move.y) or (board.grid[move.x][move.y].get_groups()[1]== "Rooks")) and (move.x >=0 and move.x <8 and move.y >=0 and move.y <8)

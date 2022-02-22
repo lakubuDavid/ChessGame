@@ -13,20 +13,9 @@ func check_possible_moves() -> Array:
 	for i in range(grid_position.x+1,8):
 		k+=1
 		if(is_valid_move(Vector2(i,grid_position.y + k))):
-			if(not board.grid[i][grid_position.y + k] is int):
-				if(get_groups()[0] == "Blacks"):
-					if(board.grid[i][grid_position.y + k].is_in_group("Whites")):
-						possible_moves.append(Vector2(i,grid_position.y + k))
-						break
-					else:
-						break
-				else:
-					if(board.grid[i][grid_position.y + k].is_in_group("Blacks")):
-						possible_moves.append(Vector2(i,grid_position.y + k))
-						break
-					else:
-						break
 			possible_moves.append(Vector2(i,grid_position.y + k))
+			if(not board.grid[i][grid_position.y+k] is int and not is_same_group(i,grid_position.y + k)):
+				break
 		else:
 			break
 	k = 0
@@ -34,20 +23,9 @@ func check_possible_moves() -> Array:
 	for i in range(grid_position.x+1,8):
 		k+=1
 		if(is_valid_move(Vector2(i,grid_position.y-k))):
-			if(not board.grid[i][grid_position.y - k] is int):
-				if(get_groups()[0] == "Blacks"):
-					if(board.grid[i][grid_position.y - k].is_in_group("Whites")):
-						possible_moves.append(Vector2(i,grid_position.y - k))
-						break
-					else:
-						break
-				else:
-					if(board.grid[i][grid_position.y - k].is_in_group("Blacks")):
-						possible_moves.append(Vector2(i,grid_position.y - k))
-						break
-					else:
-						break
 			possible_moves.append(Vector2(i,grid_position.y - k))
+			if(not board.grid[i][grid_position.y-k] is int and not is_same_group(i,grid_position.y - k)):
+				break
 		else:
 			break
 	k = 0
@@ -57,42 +35,26 @@ func check_possible_moves() -> Array:
 	while i >= 0:
 		k+=1
 		i -= 1
-		if((grid_position.y + k)>=0 and (grid_position.y + k)<8):
-			if(not board.grid[i][grid_position.y + k] is int):
-				if(get_groups()[0] == "Blacks"):
-					if(board.grid[i][grid_position.y + k].is_in_group("Whites")):
-						possible_moves.append(Vector2(i,grid_position.y + k))
-						break
-					else:
-						break
-				else:
-					if(board.grid[i][grid_position.y + k].is_in_group("Blacks")):
-						possible_moves.append(Vector2(i,grid_position.y + k))
-						break
-					else:
-						break
+		#if((grid_position.y + k)>=0 and (grid_position.y + k)<8):
+		if(is_valid_move(Vector2(i,grid_position.y + k))):
 			possible_moves.append(Vector2(i,grid_position.y + k))
+			if(not board.grid[i][grid_position.y+k] is int and not is_same_group(i,grid_position.y + k)):
+				break
+		else:
+			break
 	i = r.size() - 1
 	k = 0
 	#Up-Left
 	while i >= 0:
 		k+=1
 		i -= 1
-		if((grid_position.y - k)>=0 and (grid_position.y - k)<8):
-			if(not board.grid[i][grid_position.y - k] is int):
-				if(get_groups()[0] == "Blacks"):
-					if(board.grid[i][grid_position.y - k].is_in_group("Whites")):
-						possible_moves.append(Vector2(i,grid_position.y - k))
-						break
-					else:
-						break
-				else:
-					if(board.grid[i][grid_position.y - k].is_in_group("Blacks")):
-						possible_moves.append(Vector2(i,grid_position.y - k))
-						break
-					else:
-						break
+		#if((grid_position.y - k)>=0 and (grid_position.y - k)<8):
+		if(is_valid_move(Vector2(i,grid_position.y - k))):
 			possible_moves.append(Vector2(i,grid_position.y - k))
+			if(not board.grid[i][grid_position.y-k] is int and not is_same_group(i,grid_position.y - k)):
+				break
+			else:
+				break
 
 	return possible_moves
 	pass

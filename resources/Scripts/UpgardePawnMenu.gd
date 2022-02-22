@@ -24,6 +24,7 @@ func _process(delta):
 		get_tree().paused = false
 		visible = false
 		upgraded = false
+		queue_free()
 		pass
 	pass
 
