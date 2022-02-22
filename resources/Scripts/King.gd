@@ -9,6 +9,7 @@ extends "res://resources/Scripts/ChessPiece.gd"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	is_king = true
+	add_to_group("Kings")
 	pass # Replace with function body.
 
 

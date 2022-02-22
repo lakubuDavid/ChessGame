@@ -20,6 +20,8 @@ onready var camera : Camera = get_node("../Camera")
 onready var pieces : Spatial = get_node("Pieces")
 onready var tween : Tween = get_node("Tween")
 onready var hud : Control = get_node("../HUD")
+onready var move_sfx = get_node("MoveSfxPlayer")
+onready var kill_sfx = get_node("KillSfxPlayer")
 
 var ray_length = 1000
 var tween_running : bool = false

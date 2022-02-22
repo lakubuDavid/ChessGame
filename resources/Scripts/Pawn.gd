@@ -9,6 +9,7 @@ var first_move : bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	first_move = true
+	add_to_group("Pawns")
 	connect("moved",self,"when_moved")
 	pass # Replace with function body.
 

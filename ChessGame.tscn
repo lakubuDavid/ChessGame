@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ChessGame.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/Audio/Title Theme - The Legend of Zelda - Ocarina of Time.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/Audio/Sfx/Wood Block2.wav" type="AudioStream" id=5]
+[ext_resource path="res://resources/Audio/Sfx/Wood Block3.wav" type="AudioStream" id=6]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.101961, 0.180392, 0.294118, 1 )
@@ -109,6 +111,20 @@ transform = Transform( 0.75, 0, 0, 0, 1, 0, 0, 0, 0.75, -5.25, 0, -5.25 )
 
 [node name="Tween" type="Tween" parent="Board"]
 
+[node name="MoveSfxPlayer" type="AudioStreamPlayer" parent="Board"]
+pause_mode = 2
+stream = ExtResource( 5 )
+pitch_scale = 1.1
+autoplay = true
+bus = "Sfx"
+
+[node name="KillSfxPlayer" type="AudioStreamPlayer" parent="Board"]
+pause_mode = 2
+stream = ExtResource( 6 )
+pitch_scale = 1.1
+autoplay = true
+bus = "Sfx"
+
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 0 )
 light_color = Color( 1, 0.937255, 0.960784, 1 )
@@ -123,7 +139,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 3 )
 autoplay = true

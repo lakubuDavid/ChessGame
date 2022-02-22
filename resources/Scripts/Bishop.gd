@@ -3,6 +3,7 @@ extends "res://resources/Scripts/ChessPiece.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_to_group("Bishops")
 	pass # Replace with function body.
 
 func check_possible_moves() -> Array:
