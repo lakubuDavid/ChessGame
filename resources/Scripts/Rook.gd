@@ -14,6 +14,7 @@ func _ready():
 
 func check_possible_moves() -> Array:
 	var possible_moves = []
+	#Move right
 	for i in range(grid_position.x,8):
 		if(i == grid_position.x):
 			continue
@@ -23,6 +24,7 @@ func check_possible_moves() -> Array:
 		if(i<7 and (!board.grid[i+1][grid_position.y] is int) and !is_same_group(i+1,grid_position.y)):
 			possible_moves.append(Vector2(i+1,grid_position.y))
 			break
+	#Move down
 	for i in range(grid_position.y,8):
 		if(i == grid_position.y):
 			continue
@@ -32,31 +34,34 @@ func check_possible_moves() -> Array:
 		if(i<7 and (!board.grid[grid_position.x][i+1] is int) and !is_same_group(grid_position.x,i+1)):
 			possible_moves.append(Vector2(grid_position.x,i+1))
 			break
-	var l = range(0,grid_position.x).size()
-	var m = range(0,grid_position.y).size()
-	while(l>=0):
-		if(l == grid_position.x):
-			l-=1
+	
+	var h = range(0,grid_position.x).size()
+	var v = range(0,grid_position.y).size()
+	#Move left
+	while(h>=0):
+		if(h == grid_position.x):
+			h-=1
 			continue
-		if(not is_valid_move(Vector2(l,grid_position.y))):
+		if(not is_valid_move(Vector2(h,grid_position.y))):
 			break
-		possible_moves.append(Vector2(l,grid_position.y))
-		if(l>0 and (not board.grid[l-1][grid_position.y] is int and !is_same_group(l-1,grid_position.y))):
-			possible_moves.append(Vector2(l-1,grid_position.y))
+		possible_moves.append(Vector2(h,grid_position.y))
+		if(h>0 and (not board.grid[h-1][grid_position.y] is int and !is_same_group(h-1,grid_position.y))):
+			possible_moves.append(Vector2(h-1,grid_position.y))
 			break
-		l-=1
-	while(m>=0):
-		if(m == grid_position.y):
-			m-=1
+		h-=1
+	#Move Up
+	while(v>=0):
+		if(v == grid_position.y):
+			v-=1
 			continue
-		if(not is_valid_move(Vector2(grid_position.x,m))):
+		if(not is_valid_move(Vector2(grid_position.x,v))):
 			break
 
-		possible_moves.append(Vector2(grid_position.x,m))
-		if(m>0 and (not board.grid[grid_position.x][m-1] is int and !is_same_group(grid_position.x,m-1))):
-			possible_moves.append(Vector2(grid_position.x,m-1))
+		possible_moves.append(Vector2(grid_position.x,v))
+		if(v>0 and (not board.grid[grid_position.x][v-1] is int and !is_same_group(grid_position.x,v-1))):
+			possible_moves.append(Vector2(grid_position.x,v-1))
 			break
-		m-=1
+		v-=1
 
 	return possible_moves
 	pass

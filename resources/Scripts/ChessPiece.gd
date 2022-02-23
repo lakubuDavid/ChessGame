@@ -149,7 +149,7 @@ func die():
 	pass
 	
 func is_killing_move(move : Vector2):
-	return not board.grid[move.x][move.y] is int and is_valid_move(move)
+	return (not board.grid[move.x][move.y] is int) and (not is_same_group(move.x,move.y))
 		
 func is_valid_move(move : Vector2,is_king : bool = false):
 	if(is_king):

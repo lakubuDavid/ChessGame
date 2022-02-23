@@ -9,7 +9,7 @@ https://godotengine.org/download
 
 **VSCode extension**
 
-Godot tools from calinou 
+Godot tools from geequlim 
     
 If you like this extension, you can set VS Code as your default script editor for Godot by following these steps:
 
