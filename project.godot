@@ -14,6 +14,10 @@ config/name="Board,Table and Other Games"
 run/main_scene="res://ChessGame.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Game="*res://resources/Scripts/Game.gd"
+
 [input]
 
 rotate={

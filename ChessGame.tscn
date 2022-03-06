@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://ChessGame.gd" type="Script" id=1]
+[ext_resource path="res://resources/Scripts/ChessBoard.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/Audio/Title Theme - The Legend of Zelda - Ocarina of Time.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
@@ -27,8 +27,9 @@ ssao_radius2 = 1.0
 ssao_light_affect = 1.0
 ssao_ao_channel_affect = 1.0
 ssao_quality = 2
-dof_blur_far_distance = 20.0
-dof_blur_far_transition = 10.0
+dof_blur_far_enabled = true
+dof_blur_far_distance = 50.0
+dof_blur_far_transition = 30.0
 dof_blur_far_quality = 2
 glow_enabled = true
 glow_strength = 1.1
@@ -69,42 +70,44 @@ fov = 60.0
 [node name="Listener" type="Listener" parent="Camera"]
 current = true
 
-[node name="Board" parent="." instance=ExtResource( 2 )]
-script = ExtResource( 1 )
-whos_starting = 1
+[node name="blacks_light" type="Spatial" parent="."]
+transform = Transform( -0.0669871, 0.965926, 0.25, -0.25, -0.258819, 0.933013, 0.965926, -1.56462e-07, 0.258819, 7, 4, 7 )
 
-[node name="blacks_light" type="Spatial" parent="Board"]
-transform = Transform( 0.0669872, -0.965926, -0.25, -0.25, -0.258819, 0.933013, -0.965926, 7.6788e-08, -0.258819, -7, 4, -7 )
-
-[node name="light" type="SpotLight" parent="Board/blacks_light"]
+[node name="light" type="SpotLight" parent="blacks_light"]
 transform = Transform( 0.875, -0.129409, -0.466506, -0.129409, 0.866025, -0.482963, 0.466506, 0.482963, 0.741025, -12.5851, -13.523, -7.12346 )
 light_color = Color( 0.94902, 0.733333, 0.533333, 1 )
 shadow_enabled = true
 spot_range = 15.0
 spot_angle = 60.0
 
-[node name="light_2" type="SpotLight" parent="Board/blacks_light"]
+[node name="light_2" type="SpotLight" parent="blacks_light"]
 transform = Transform( 0.866025, 1.48677e-07, -0.5, -1.50071e-07, 1, 5.005e-08, 0.5, 3.47753e-08, 0.866025, -13.523, 9.53674e-07, -3.62347 )
 light_color = Color( 0.94902, 0.733333, 0.533333, 1 )
 shadow_enabled = true
 spot_range = 15.0
 spot_angle = 60.0
 
-[node name="whites_light" type="Spatial" parent="Board"]
+[node name="whites_light" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.90735e-06, -9.53674e-07 )
 
-[node name="light_3" type="SpotLight" parent="Board/whites_light"]
+[node name="light_3" type="SpotLight" parent="whites_light"]
 transform = Transform( 0.0669872, -0.965926, -0.25, -0.25, -0.258819, 0.933013, -0.965926, 7.6788e-08, -0.258819, -7, 4, -7 )
 light_color = Color( 0.94902, 0.733333, 0.533333, 1 )
 shadow_enabled = true
 spot_range = 15.0
 spot_angle = 60.0
 
-[node name="light_4" type="SpotLight" parent="Board/whites_light"]
+[node name="light_4" type="SpotLight" parent="whites_light"]
 transform = Transform( -0.0669872, -0.965926, 0.25, -0.25, 0.258819, 0.933013, -0.965926, -7.58238e-08, -0.258819, 7, 4, -7 )
 light_color = Color( 0.94902, 0.733333, 0.533333, 1 )
 shadow_enabled = true
 spot_range = 15.0
 spot_angle = 60.0
+
+[node name="Board" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+script = ExtResource( 1 )
+whos_starting = 1
 
 [node name="Pieces" type="Spatial" parent="Board"]
 transform = Transform( 0.75, 0, 0, 0, 1, 0, 0, 0, 0.75, -5.25, 0, -5.25 )

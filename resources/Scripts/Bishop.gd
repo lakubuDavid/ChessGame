@@ -53,8 +53,8 @@ func check_possible_moves() -> Array:
 			possible_moves.append(Vector2(i,grid_position.y - k))
 			if(not board.grid[i][grid_position.y-k] is int and not is_same_group(i,grid_position.y - k)):
 				break
-			else:
-				break
+		else:
+			break
 
 	return possible_moves
 	pass
