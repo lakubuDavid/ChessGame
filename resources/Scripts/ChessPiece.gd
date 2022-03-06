@@ -48,14 +48,6 @@ func set_focus(value):
 		hud.get_node("debug_rect/label_grid_position").text = "Grid position : "+str(grid_position)
 		var p_moves : Array = check_possible_moves()
 		for i in range(p_moves.size()):
-			var indicator_mesh = MeshInstance.new()
-			indicator_mesh.mesh = PlaneMesh.new()
-			indicator_mesh.mesh.size = Vector2(2.0,2.0)
-			if(is_killing_move(Vector2(p_moves[i].x,p_moves[i].y))):
-				indicator_mesh.material_override = EatingTargetMoveMat
-			else:
-				indicator_mesh.material_override = PossibleTargetMoveMat
-			indicator_mesh.visible = true
 			
 			var move_indicator = Area.new()
 			move_indicator.set_meta("possible_move",p_moves[i])
@@ -68,7 +60,16 @@ func set_focus(value):
 			collision_shape.shape.extents = Vector3(1,.25,1)
 			
 			move_indicator.add_child(collision_shape)
-			move_indicator.add_child(indicator_mesh)
+			if(Game.show_moves):
+				var indicator_mesh = MeshInstance.new()
+				indicator_mesh.mesh = PlaneMesh.new()
+				indicator_mesh.mesh.size = Vector2(2.0,2.0)
+				if(is_killing_move(Vector2(p_moves[i].x,p_moves[i].y))):
+					indicator_mesh.material_override = EatingTargetMoveMat
+				else:
+					indicator_mesh.material_override = PossibleTargetMoveMat
+				indicator_mesh.visible = true
+				move_indicator.add_child(indicator_mesh)
 			
 			get_parent().add_child(move_indicator)
 			

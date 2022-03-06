@@ -20,7 +20,7 @@ func _process(delta):
 		var final_piece_n = load("res://scenes/"+final_group+"/"+final_piece+".tscn").instance()
 		final_piece_n.translation = Vector3(final_grid_position.y*2,0,final_grid_position.x*2)
 		final_piece_n.grid_position = final_grid_position
-		get_tree().root.get_node("Game/Board").grid[final_grid_position.x][final_grid_position.y].replace_by(final_piece_n)
+		Game.board.grid[final_grid_position.x][final_grid_position.y].replace_by(final_piece_n)
 		get_tree().paused = false
 		visible = false
 		upgraded = false

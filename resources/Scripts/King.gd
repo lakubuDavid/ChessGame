@@ -16,23 +16,23 @@ func _ready():
 func check_possible_moves() -> Array:
 	var possible_moves = []
 	
-	if(is_valid_move(Vector2(grid_position.x+1,grid_position.y-1),true)):
+	if(is_valid_move(Vector2(grid_position.x+1,grid_position.y-1))):
 		possible_moves.append(Vector2(grid_position.x+1,grid_position.y-1))
-	if(is_valid_move(Vector2(grid_position.x+1,grid_position.y),true)):
+	if(is_valid_move(Vector2(grid_position.x+1,grid_position.y))):
 		possible_moves.append(Vector2(grid_position.x+1,grid_position.y))
-	if(is_valid_move(Vector2(grid_position.x+1,grid_position.y+1),true)):
+	if(is_valid_move(Vector2(grid_position.x+1,grid_position.y+1))):
 		possible_moves.append(Vector2(grid_position.x+1,grid_position.y+1))
 		
-	if(is_valid_move(Vector2(grid_position.x,grid_position.y-1),true)):
+	if(is_valid_move(Vector2(grid_position.x,grid_position.y-1))):
 		possible_moves.append(Vector2(grid_position.x,grid_position.y-1))	
-	if(is_valid_move(Vector2(grid_position.x,grid_position.y+1),true)):
+	if(is_valid_move(Vector2(grid_position.x,grid_position.y+1))):
 		possible_moves.append(Vector2(grid_position.x,grid_position.y+1))
 		
-	if(is_valid_move(Vector2(grid_position.x-1,grid_position.y-1),true)):
+	if(is_valid_move(Vector2(grid_position.x-1,grid_position.y-1))):
 		possible_moves.append(Vector2(grid_position.x-1,grid_position.y-1))
-	if(is_valid_move(Vector2(grid_position.x-1,grid_position.y),true)):
+	if(is_valid_move(Vector2(grid_position.x-1,grid_position.y))):
 		possible_moves.append(Vector2(grid_position.x-1,grid_position.y))
-	if(is_valid_move(Vector2(grid_position.x-1,grid_position.y+1),true)):
+	if(is_valid_move(Vector2(grid_position.x-1,grid_position.y+1))):
 		possible_moves.append(Vector2(grid_position.x-1,grid_position.y+1))
 		
 	return possible_moves
